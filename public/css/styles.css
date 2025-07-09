@@ -4,3 +4,148 @@
 *:after {
   box-sizing: border-box;
 }
+
+header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.siteName a{
+  font-size:2.5rem;
+  text-decoration: none;
+  font-weight:600;
+  color: black;
+}
+
+#tools a{
+  color: black;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-list ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: white;
+  background-color: black;
+  font-size: 1.5rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  padding: 1.5rem;
+}
+
+.hero-section{
+  background-image: url(../images/vehicles/adventador-tn.jpg);
+  background-repeat: no-repeat;
+  background-size:cover;
+  padding: 200px;
+  height: 300px;
+}
+
+.hero-section {
+  position: relative;
+}
+
+.hero-section div {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color:rgba(0, 0, 0, 0.5);
+}
+
+.hero-section li{
+  color: rgb(20, 130, 166);
+  font-weight:bold;
+  font-size: 1.8rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.delorean-section h2{
+  font-size: 2rem;
+  color: black;
+  font-weight: 900;
+  margin: 20px;
+}
+
+.delorean-section li{
+  margin: 15px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.delorean-section div{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* width: 300px; */
+
+}
+
+figure{
+  background-color: skyblue;
+  text-align: center;
+  width: 170px;
+}
+
+@media screen and (min-width: 1024px) {
+  .hero-section{
+    background-image: url(../images/vehicles/adventador-tn.jpg);
+    background-repeat: no-repeat;
+    background-size:contain;
+    padding: 500px;
+    height: 300px;
+  }
+
+ .delorean-section li{
+  margin: 35px;
+}
+
+  .hero-section div{
+    font-weight:bolder;
+    font-size: 2.8rem;
+  }
+
+  .delorean-section {
+    display: grid;
+    grid-template-areas:
+      "heading1 heading2"
+      "left right";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  /* Corrected selector for h2 inside .delorean-section */
+
+  .header2 {
+    grid-area: heading1;
+  }
+  .header2 {
+    grid-area: heading2;
+  }
+
+  .delorean-section .left {
+    grid-area: left;
+  }
+
+  .delorean-section .right {
+    grid-area: right;
+  }
+
+
+
+  .whole-body{
+    margin: 100px;
+    border: 9px solid;
+    padding:25px;
+    border-radius: 20px;
+    border-color:rgb(20, 130, 166) ;
+    
+  }
+
+}
+
+
+
+
+
