@@ -2,12 +2,13 @@
 
 const express = require("express")
 const router = new express.Router()
-//const inController = require("../controllers/invController");
-const invCont = require("../controllers/invController");
+const invController = require("../controllers/invController");
+//const invCont = require("../controllers/invController");
 const utilities = require("../utilities/")
 
 //Route to uild inventory by  classification view
-router.get("/type/:classificationId", inController.buildByClassificationId);
+//router.get("/type/:classificationId", inController.buildByClassificationId);
+router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
 
 router.get("/detail/:inv_id", utilities.handleErrors(invController.buildByInventoryId))
 
