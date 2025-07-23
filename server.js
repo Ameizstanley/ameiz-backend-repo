@@ -5,15 +5,24 @@
 /* ***********************
  * Require Statements
  *************************/
+// const express = require("express")
+// const expressLayouts = require("express-ejs-layouts")
+// const env = require("dotenv").config()
+// const app = express()
+// const static = require("./routes/static")
+// const inventoryRoute = require("./routes/inventoryRoute")
+// const utilities = require ("./utilities/")
+
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const utilities = require ("./utilities/")
-
-
+const errorRoute = require("./routes/errorRoute")
+const utilities = require("./utilities/")  // ONLY DECLARE THIS ONCE
+const errorHandler = require("./middleware/errorHandler")
 /* ***********************
  * Routes
  *************************/
@@ -41,8 +50,6 @@ app.use(async (err, req, res, next) => {
 })
 
 
-//Add utilities to scope
-const utilities = require("./utilities/index")
 
 /* ***********************
  * Local Server Information
