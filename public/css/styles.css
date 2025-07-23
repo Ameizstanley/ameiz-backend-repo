@@ -88,6 +88,105 @@ figure{
   width: 170px;
 }
 
+.vehicle-detail {
+  display: flex;
+  gap:2rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.vehicle-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+}
+
+.vehicle-info {
+  flex:1;
+  min-width: 300px;
+}
+
+.vehicle-info h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.price-section {
+  margin: 1rem 0;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  color:#2c5f2d;
+  background: #f0f8f0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.details-item {
+  background: #f8f9fa;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border-left: 4px solid #007bff;
+  ;
+
+}
+
+.description {
+  margin-top: 1.5rem;
+}
+
+.description h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.description p {
+  line-height: 1.6;
+  color: #555;
+}
+
+
+@media screen and (max-width: 768px) {
+  .vehicle-detail {
+    flex-direction: column;
+  }
+  
+  .vehicle-image,
+  .vehicle-info {
+    min-width: 100%;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  
+}
+
+
+
+
+
+
+
+
 @media screen and (min-width: 1024px) {
   .hero-section{
     background-image: url(../images/vehicles/adventador-tn.jpg);

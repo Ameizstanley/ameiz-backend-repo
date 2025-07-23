@@ -15,7 +15,7 @@ WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 SELECT inv_make, inv_model, classification_name
 FROM inventory
 INNER JOIN classification ON inventory.classification_id = classification.classification_id
-WHERE classification_name = 'Sport';
+WHERE classification_id = 1;
 
 UPDATE inventory
 SET inv_image = REPLACE (inv_image, '/images/', '/images/vehicles/'),

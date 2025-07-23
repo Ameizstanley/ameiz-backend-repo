@@ -63,10 +63,10 @@ INSERT INTO public.inventory (
     inv_price,
     inv_miles,
     inv_color,
-    classif    'Chevy',ication_id
+    classification_id
   )
 VALUES   (
-
+    'Chevy',
     'Camaro',
     '2018',
     'If you want to look cool this is the ar you need! This car has great performance at an affordable price. Own it today!',
