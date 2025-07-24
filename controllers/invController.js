@@ -39,6 +39,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
             title: itemName,
             nav,
             grid,
+            itemName,
         })
     }else{
         const err = new Error("Vehicle not found")
