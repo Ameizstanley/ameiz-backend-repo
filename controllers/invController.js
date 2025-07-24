@@ -1,18 +1,27 @@
+// controllers/invController.js
 const invModel = require("../models/inventory-model")
-const utilities = require("../utilities/") // Fixed typo: utitlities -> utilities
+const utilities = require("../utilities/")
 
 const invCont = {}
 
-// Build inventory by classification view
+/* ***************************
+ *  Build inventory listing by classification view
+ * ************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
     try {
         const classification_id = req.params.classificationId
         const data = await invModel.getInventoryByClassificationId(classification_id)
         const nav = await utilities.getNav()
         
-        // You need to define these variables:
-        const className = data.classification_name || "Unknown" // Get from data
-        const grid = utilities.buildClassificationGrid(data) || "" // Build grid from data
+        // Check if data exists and has items
+        let className = "No Classification Found"
+        if (data && Array.isArray(data) && data.length > 0) {
+            // data is an array of vehicles, get classification_name from first item
+            className = data[0].classification_name || "Unknown Classification"
+        }
+        
+        // Build the grid from the data array
+        const grid = await utilities.buildClassificationGrid(data || [])
         
         res.render("./inventory/classification", {
             title: className + " vehicles",
@@ -21,32 +30,36 @@ invCont.buildByClassificationId = async function (req, res, next) {
         })
     } catch (error) {
         next(error) // Pass error to error handler
-
-}
-
-// Build inventory item detail view
-
-invCont.buildByInventoryId = async function (req, res, next) {
-    const inv_id = req.params.inv_id
-    const data = await invModel.getInventoryByInventoryId(inv_id)
-
-    if(data) {
-        const grid = utilities.buildDetailView(data)
-        let nav = await utilities.getNav()
-        const itemName = `${data.inv_make} ${data.inv_model}) `
-
-        res.render("./inventory/detail", {
-            title: itemName,
-            nav,
-            grid,
-            itemName,
-        })
-    }else{
-        const err = new Error("Vehicle not found")
-        err.status = 404
-        next(err)
     }
 }
+
+/* ***************************
+ *  Build inventory item detail view
+ * ************************** */
+invCont.buildByInvId = async function (req, res, next) {
+    try {
+        const inv_id = req.params.invId  // Note: invId not inv_id
+        const data = await invModel.getInventoryByInvId(inv_id)  // Note: getInventoryByInvId not getInventoryByInventoryId
+
+        if (data) {
+            const detailHTML = await utilities.buildDetailView(data)  // Note: buildDetailView not buildClassificationGrid
+            let nav = await utilities.getNav()
+            const vehicleName = `${data.inv_year} ${data.inv_make} ${data.inv_model}`  // Include year
+
+            res.render("./inventory/detail", {
+                title: vehicleName,
+                nav,
+                detailHTML,  // Note: detailHTML not grid
+                vehicleName,  // Note: vehicleName not itemName
+            })
+        } else {
+            const err = new Error("Vehicle not found")
+            err.status = 404
+            next(err)
+        }
+    } catch (error) {
+        next(error)
+    }
 }
-// THIS WAS MISSING - Export the controller
-module.exports = invCont      
+
+module.exports = invCont
