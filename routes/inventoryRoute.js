@@ -1,28 +1,17 @@
-//Needed Resources
-
+// routes/inventoryRoute.js - UPDATED with error route
 const express = require("express")
 const router = new express.Router()
-const invController = require("../controllers/invController");
-//const invCont = require("../controllers/invController");
-const utilities = require("../utilities/")
+const invController = require("../controllers/invController")
+const utilities = require("../utilities")
 
-//Route to uild inventory by  classification view
+// Route to build inventory by classification view
+router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
-router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
+// Route to build inventory item detail view
+router.get("/detail/:invId", utilities.handleErrors(invController.buildByInventoryId));
 
-router.get("/detail/:inv_id", utilities.handleErrors(invController.buildByInventoryId))
-
+// Route to trigger intentional error for testing
 router.get("/trigger-error", utilities.handleErrors(invController.triggerError));
 
-//intentionally trigger a 500 error
-
-// invCont.triggerError = async function (req, res, next) {
-//     const error = new Error('this is an intentional 500 error for testing purposes')
-//     error.status = 500
-//     throw error
-    
-// }
-
-//build inventory item detail view
-
 module.exports = router;
+

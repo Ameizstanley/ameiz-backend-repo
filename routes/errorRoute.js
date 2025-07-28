@@ -6,4 +6,4 @@ const utilities = require("../utilities/")
 // Route to trigger intentional 500 error
 router.get("/trigger", utilities.handleErrors(errorController.triggerError))
 
-module.exports = router
+// module.exports = router

@@ -1,6 +1,124 @@
-<% const d = new Date ()
-let year = d.getFullYear() %>
+<!-- views/partials/footer.ejs -->
 <footer>
-    <p class="copyright"> ; <%= year %>, CSE 340 App</p>
-    <a href="/inv/trigger-error">Test Error Handling</a>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>CSE Motors</h4>
+      <p>Your trusted automotive partner since 2024</p>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/" title="Home">Home</a></li>
+        <li><a href="/inv" title="Inventory">Inventory</a></li>
+        <li><a href="/account" title="Account">Account</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="/contact" title="Contact Us">Contact Us</a></li>
+        <li><a href="/help" title="Help">Help</a></li>
+        <!-- Updated error link to match your route structure -->
+        <li><a href="/inv/trigger-error" title="Test Error Handling">Test Error</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; <%= new Date().getFullYear() %> CSE Motors. All rights reserved.</p>
+    <p>
+      <a href="/privacy" title="Privacy Policy">Privacy Policy</a> | 
+      <a href="/terms" title="Terms of Service">Terms of Service</a>
+    </p>
+  </div>
 </footer>
+
+<style>
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 2rem 0 1rem;
+  margin-top: 3rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-section h4 {
+  color: #fff;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 0.5rem 0;
+}
+
+.footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.footer-section p {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.footer-bottom {
+  border-top: 1px solid #555;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  text-align: center;
+  color: #999;
+}
+
+.footer-bottom p {
+  margin: 0.5rem 0;
+}
+
+.footer-bottom a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive footer */
+@media screen and (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-section {
+    min-width: auto;
+  }
+}

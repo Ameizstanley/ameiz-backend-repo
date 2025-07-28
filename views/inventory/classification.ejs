@@ -1,11 +1,125 @@
-<!-- The Content Heading -->
 <% if (title) { %>
-<h1><%=<title>%></h1>
-<% } else {
-    res.redirect('/')
-} %>
+  <% title = locals.title %>
+<% } else { %>
+  <% title = "Vehicle Classification" %>
+<% } %>
 
-<%# messages() %>
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
 
-<!-- The Inventory Items Display -->
-<%- grid %>
+<main>
+  <h1><%= title %></h1>
+  
+  <% if (locals.grid) { %>
+    <%- grid %>
+  <% } else { %>
+    <div class="notice">
+      <p>Sorry, no vehicles could be found for this classification.</p>
+      <p><a href="/inv" title="Return to inventory">Return to Inventory</a></p>
+    </div>
+  <% } %>
+</main>
+
+<%- include('../partials/footer') %>
+
+<style>
+/* Classification Grid Styles */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+  list-style: none;
+  margin: 0;
+}
+
+#inv-display li {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#inv-display li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+#inv-display img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.namePrice {
+  padding: 1.5rem;
+}
+
+.namePrice hr {
+  margin: 0 0 1rem 0;
+  border: none;
+  border-top: 2px solid #007bff;
+}
+
+.namePrice h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.namePrice h2 a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.namePrice h2 a:hover {
+  color: #007bff;
+}
+
+.namePrice span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Notice styles */
+.notice {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+.notice p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.notice a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.notice a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+  #inv-display {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  
+  .namePrice {
+    padding: 1rem;
+  }
+}
+</style>
