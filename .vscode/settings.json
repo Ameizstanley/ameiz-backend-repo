@@ -11,6 +11,18 @@
             "driver": "PostgreSQL",
             "name": "ameiz database vc",
             "connectString": "postgresql://ameizstancse340:9ROLftcWFidgASKGZwyGirhcsWPzjkMF@dpg-d1jbetndiees738rs130-a.frankfurt-postgres.render.com/ameizstancse340"
+        },
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "ameizrender.com",
+            "connectString": "postgresql://ameizstandb:Xnc3asy5OtH5xNCBy1wI2KEPZ1QREfXa@dpg-d1tlarbe5dus73dn2i5g-a.frankfurt-postgres.render.com/ameizstandb"
         }
     ]
 }
