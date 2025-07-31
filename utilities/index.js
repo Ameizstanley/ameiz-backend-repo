@@ -62,15 +62,17 @@ Util.buildClassificationGrid = async function(data){
 Util.buildDetailView = async function(data){
   let detail = '<div class="detail">'
   detail += '<div class="vehicle-image">'
-  detail += `<img src="${data.inv_image} alt=image of${data.inv_make} ${data.inv_model}"`
-  detail += '<div>'
-  detail += '<div class="vehicle--info">'
-  detail += `<h2>${data.inv_image} ${data.inv_model} </h2>`
+  // Fixed: Corrected image src path and added missing closing quote and >
+  detail += `<img src="/vehicles/${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model}">`
+  detail += '</div>' // Fixed: Corrected closing div tag
+  detail += '<div class="vehicle-info">' // Fixed: Corrected class name (removed double dash)
+  // Fixed: Changed inv_image to inv_make in the h2 tag
+  detail += `<h2>${data.inv_make} ${data.inv_model}</h2>`
   detail += '<div class="price-section">'
   detail += `<span class="price">$${Number(data.inv_price).toLocaleString('en-US')}</span>`
   detail += '</div>'
   detail += '<div class="details-grid">'
-  detail += `<div class="detail-item"><strong>Year: </strong> ${data.inv_year}</div>`
+  detail += `<div class="detail-item"><strong>Year:</strong> ${data.inv_year}</div>`
   detail += `<div class="detail-item"><strong>Mileage:</strong> ${Number(data.inv_miles).toLocaleString('en-US')} miles</div>`
   detail += `<div class="detail-item"><strong>Color:</strong> ${data.inv_color}</div>`
   detail += '</div>'
@@ -80,18 +82,8 @@ Util.buildDetailView = async function(data){
   detail += '</div>'
   detail += '</div>'
   detail += '</div>'
-  detail += '</div>'
   return detail
 }
-
-
-
-
-
-
-
-
-
 
 /* ****************************************
  * Middleware For Handling Errors
@@ -99,6 +91,5 @@ Util.buildDetailView = async function(data){
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-
 
 module.exports = Util
