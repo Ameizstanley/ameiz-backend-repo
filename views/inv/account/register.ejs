@@ -29,17 +29,17 @@
         <form action="/inv/account/register" method="POST">
             <div>
                 <label for="firstname">FirstName:</label>
-                <input type="text" id="username" name="account_firstname" required>
+                <input type="text" id="username" name="account_firstname" required value="<%= locals.account_firstname %>">
             </div>
 
             <div>
                 <label for="lastname">LastName:</label>
-                <input type="text" id="lastname" name="account_lastname" required>
+                <input type="text" id="lastname" name="account_lastname" required value="<%= locals.account_lastname %>">
             </div>
 
             <div>
                 <label for="email">Email address:</label>
-                <input type="email" id="email" name="account_email" required>
+                <input type="email" id="email" name="account_email" required value="<%= locals.account_email %>">
             </div>
 
             <div>

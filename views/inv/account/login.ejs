@@ -14,7 +14,19 @@
                 <%= flash.message %>
             </div>
         <% } %>
-        <form action="/inv/account/login" method="POST">
+
+
+        <% if (errors) { %>
+            <ul class="notice">
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+
+
+        <form id="loginForm" action="/inv/account/login" method="POST">
             <div>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="account_email" required>

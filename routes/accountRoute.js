@@ -10,18 +10,27 @@ router.get('/account', (req, res) => {
 });
 
 // Login routes
-router.get('/login', accountController.buildLogin);
+router.get('/login',utilities.handleErrors (accountController.buildLogin));
 
 
 //registration routes
-router.get('/register', accountController.buildRegister);
+router.get('/register', utilities.handleErrors (accountController.buildRegister));
 
 //registration post
 router.post
    ('/register',
     regValidate.registationRules,
     regValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount))
+    utilities.handleErrors(accountController.registerAccount));
+
+// Process the login attempt
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.loginAccount)
+)
+
 
 
 module.exports = router;

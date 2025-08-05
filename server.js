@@ -5,37 +5,36 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
-const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require("./database/")
 const bodyParser = require("body-parser")
 
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// Session middleware FIRST
-app.use(session({
-  store: new (require('connect-pg-simple')(session))({
-    createTableIfMissing: true,
-    pool,
-  }),
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  name: 'sessionId',
-}))
+
+
+
 
 // Flash middleware NEXT
-app.use(require('connect-flash')())
-app.use(function(req, res, next){
-  res.locals.flash = req.flash();
-  next();
-})
+// app.use(require('connect-flash')())
+// app.use(function(req, res, next){
+//   res.locals.flash = req.flash();
+//   next();
+// })
 
 // THEN register your routes
 const accountRoute = require('./routes/accountRoute');
 app.use('/inv/account/', accountRoute); // This makes routes accessible at /account/login
+
+
+// Inventory routes
+const inventoryRoute = require("./routes/inventoryRoute")
+app.use("/inventory", inventoryRoute)
+
+
 
 const path = require('path')
 
@@ -50,14 +49,30 @@ const path = require('path')
 app.use(static)
 
 // Express Messages Middleware
+
+
+// In your server.js or app.js
+app.use(express.static('public'))
+
+
+
+// Session middleware FIRST
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
-
-// In your server.js or app.js
-app.use(express.static('public'))
 
 /* ***********************
  * View Engine and Templates
@@ -97,8 +112,7 @@ app.set("layout", "./layouts/layout")
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
-// Inventory routes
-app.use("/inv", inventoryRoute)
+
 
 // Intentional error route (for testing)
 app.get("/error/trigger", utilities.handleErrors(async (req, res, next) => {
