@@ -25,14 +25,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //   next();
 // })
 
-// THEN register your routes
-const accountRoute = require('./routes/accountRoute');
-app.use('/inv/account/', accountRoute); // This makes routes accessible at /account/login
-
-
-// Inventory routes
-const inventoryRoute = require("./routes/inventoryRoute")
-app.use("/inventory", inventoryRoute)
 
 
 
@@ -112,6 +104,14 @@ app.set("layout", "./layouts/layout")
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
+// THEN register your routes
+const accountRoute = require('./routes/accountRoute');
+app.use('/inv/account/', accountRoute); // This makes routes accessible at /account/login
+
+
+// Inventory routes
+const inventoryRoute = require("./routes/inventoryRoute")
+app.use("/inv", inventoryRoute)
 
 
 // Intentional error route (for testing)

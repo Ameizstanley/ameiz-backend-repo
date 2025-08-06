@@ -1,15 +1,91 @@
-<form action="/inv/add-classification" method="post">
-  <label for="classification_name">Classification Name:</label>
-  <input type="text" id="classification_name" name="classification_name" required>
-  <p>Note: Classification name cannot contain spaces or special characters</p>
-  <button type="submit">Add Classification</button>
-</form>
+
+  <h1><%= title %></h1>
+
+  <%- messages() %>
+
+<div class="form-container">
+  <form id="addClassificationForm" action="/inv/add-classification" method="post">
+    <fieldset>
+      <legend>Add New Classification</legend>
+      
+      <div class="form-instructions">
+        <p><strong>Instructions:</strong> Classification names cannot contain spaces or special characters. Use only letters and numbers.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="classification_name">Classification Name:</label>
+        <input 
+          type="text" 
+          id="classification_name" 
+          name="classification_name" 
+          required 
+          pattern="^[a-zA-Z0-9]+$"
+          title="Classification name cannot contain spaces or special characters"
+          value="<%= locals.classification_name ? classification_name : '' %>"
+          placeholder="Enter classification name"
+        >
+        <span class="error-message" id="classificationNameError"></span>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Add Classification" class="submit-btn">
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<% if (errors) { %>
+  <div class="error-container">
+    <ul class="error-list">
+      <% errors.array().forEach(function(error) { %>
+        <li class="error-item"><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
 
 <script>
-// Client-side validation
-document.getElementById('classification_name').addEventListener('input', function(e) {
-  const value = e.target.value;
-  const isValid = /^[a-zA-Z0-9]+$/.test(value);
-  // Add validation feedback
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('addClassificationForm');
+  const classificationInput = document.getElementById('classification_name');
+  const errorSpan = document.getElementById('classificationNameError');
+
+  // Real-time validation
+  classificationInput.addEventListener('input', function() {
+    const value = this.value;
+    const pattern = /^[a-zA-Z0-9]*$/;
+    
+    if (value && !pattern.test(value)) {
+      errorSpan.textContent = 'Classification name cannot contain spaces or special characters.';
+      errorSpan.style.color = 'red';
+      this.setCustomValidity('Invalid characters detected');
+    } else {
+      errorSpan.textContent = '';
+      this.setCustomValidity('');
+    }
+  });
+
+  // Form submission validation
+  form.addEventListener('submit', function(e) {
+    const classificationName = classificationInput.value.trim();
+    const pattern = /^[a-zA-Z0-9]+$/;
+    
+    if (!classificationName) {
+      e.preventDefault();
+      errorSpan.textContent = 'Classification name is required.';
+      errorSpan.style.color = 'red';
+      classificationInput.focus();
+      return;
+    }
+    
+    if (!pattern.test(classificationName)) {
+      e.preventDefault();
+      errorSpan.textContent = 'Classification name cannot contain spaces or special characters.';
+      errorSpan.style.color = 'red';
+      classificationInput.focus();
+      return;
+    }
+  });
 });
 </script>
+

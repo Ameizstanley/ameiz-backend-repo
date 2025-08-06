@@ -1,16 +1,29 @@
 <!-- Basic structure to test -->
   <main>
     <h1> <%= title %></h1>
-    <% if (flash.notice && flash.notice.length) { %>
-      <div class="flash-message">
-        <%= flash.notice[0] %>
-      </div>
-    <% } %>
+    <%- messages() %>
 
-    <div class="management-links">
-      <a href="/views/inventory/add-classification.ejs">Add New Classification</a>
-      <a href="/views/inventory/add-inventory.ejs">Add New Inventory Item</a>
-    </div>
+<div class="management-links">
+  <h2>Inventory Management</h2>
+  <p>Welcome to the inventory management system. Choose an option below:</p>
+  
+  <div class="management-options">
+    <a href="/inv/add-classification" class="management-link">
+      <div class="link-card">
+        <h3>Add New Classification</h3>
+        <p>Add a new vehicle classification to the system</p>
+      </div>
+    </a>
+    
+    <a href="/inv/add-inventory" class="management-link">
+      <div class="link-card">
+        <h3>Add New Vehicle</h3>
+        <p>Add a new vehicle to the inventory</p>
+      </div>
+    </a>
+  </div>
+</div>
+
     
   </main>
  
